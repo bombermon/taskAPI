@@ -1,0 +1,83 @@
+openapi: 3.0.3
+
+info:
+  title: VET API
+  version: 1.2.3
+  description: API ветклиники
+tags:
+  - name: Pets
+    description: Поиск питомцев
+paths:
+  /api/owners/{owner_id}/pets:
+    get:
+      tags: 
+        - Pets
+      summary: Получить список питомцев владельца
+      parameters:
+        - name: owner_id
+          in: path
+          description: Поиск по пользователям
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Поиск выполнен.
+          content:
+            application/json:
+              example:
+                owner_id: 1
+                owner_name: Bob
+                pets:
+                  - pet_id: '1'
+                    pet_name: Симуран
+                    breed: Цвергшнауцер
+                    age: 7
+                    weight: 9
+                  - pet_id: '2'
+                    pet_name: Якогор Грансенбон
+                    breed: Цвергпинчер
+                    age: 14
+                    weight: 10
+        '404':
+          description: Владелец не найден.
+  /api/pets:
+    get:
+      tags: 
+        - Pets
+      summary: Получить список всех питомцев
+      responses:
+        '200':
+          description: Поиск питомцев выполнен
+          content:
+            application/json:
+              example:
+                pets:
+                  - pet_id: '1'
+                    pet_name: Симуран
+                    breed: Цвергшнауцер
+                    age: 7
+                    weight: 9
+                    owner_id: '123'
+                    owner_name: Bob
+                  - pet_id: '2'
+                    pet_name: Симуран
+                    breed: Цвергшнауцер
+                    age: 7
+                    weight: 9
+                    owner_id: '123'
+                    owner_name: Bob
+                  - pet_id: '3'
+                    pet_name: Бобик
+                    breed: Питбуль
+                    age: 7
+                    weight: 15
+                    owner_id: null
+                    owner_name: null
+                  - pet_id: '4'
+                    pet_name: Тюбик
+                    breed: Такса
+                    age: 2
+                    weight: 8
+                    owner_id: null
+                    owner_name: null
